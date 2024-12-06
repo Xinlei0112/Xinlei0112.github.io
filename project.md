@@ -32,11 +32,6 @@ These datasets provide:
 - Categorical features (`region` and `sector`) were label-encoded.
 - Numerical features (e.g., `GHG emissions`, `Value Added`) were normalized to ensure compatibility with machine learning models.
 
-Below is an example visualization from the dataset:
-
-![](assets/IMG/datapenguin.png){: width="500" }
-
-*Figure 1: Emissions data distribution, visualized for exploratory analysis.*
 
 ***
 
@@ -90,6 +85,8 @@ plt.xticks(rotation=45)
 plt.show()
 
 ## Modelling
+
+In addition to this, I have trained the LSTM time series analysis model and then predicted the GHG emission in different regions of the world in 2023 and visualized the result
 
 Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
 
