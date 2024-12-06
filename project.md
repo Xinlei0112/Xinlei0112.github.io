@@ -90,15 +90,61 @@ In addition to this, I have trained the LSTM time series analysis model and then
 
 Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
 
-The model might involve optimizing some quantity. You can include snippets of code if it is helpful to explain things.
+# 1. Data preprocessing
+features = ['region_encoded', 'sector_encoded', 'Value Added [M.EUR]', 
+            'Employment [1000 p.]', 'Energy Carrier Net Total [TJ]']
+target = 'GHG emissions [kg CO2 eq.]'
 
-```python
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.datasets import make_classification
-X, y = make_classification(n_features=4, random_state=0)
-clf = ExtraTreesClassifier(n_estimators=100, random_state=0)
-clf.fit(X, y)
-clf.predict([[0, 0, 0, 0]])
+# Group and sort by region and sector
+merged_df = merged_df.sort_values(by=['region_encoded', 'sector_encoded', 'Year'])
+
+# Normalized features
+scaler = MinMaxScaler()
+merged_df[features + [target]] = scaler.fit_transform(merged_df[features + [target]])
+
+# Create time series data
+def create_sequences(data, seq_length):
+    X, y = [], []
+    for i in range(len(data) - seq_length):
+        X.append(data[i:i+seq_length, :-1])  
+        y.append(data[i+seq_length, -1])    
+    return np.array(X), np.array(y)
+
+seq_length = 5  
+grouped = merged_df.groupby(['region_encoded', 'sector_encoded'])
+
+X, y = [], []
+for _, group in grouped:
+    group_values = group[features + [target]].values
+    X_seq, y_seq = create_sequences(group_values, seq_length)
+    X.extend(X_seq)
+    y.extend(y_seq)
+
+X = np.array(X)
+y = np.array(y)
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 2. Build the LSTM model
+model = Sequential([
+    LSTM(64, activation='relu', input_shape=(seq_length, X.shape[2]), return_sequences=True),
+    Dropout(0.2),
+    LSTM(32, activation='relu'),
+    Dropout(0.2),
+    Dense(1)  
+])
+
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+model.summary()
+
+# 3. Train the model
+history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=1, batch_size=32)
+
+# 4. Evaluation model
+loss, mae = model.evaluate(X_test, y_test)
+print(f"Test Loss: {loss}, Test MAE: {mae}")
+
 ```
 
 This is how the method was developed.
@@ -109,9 +155,17 @@ Hyperparameters were tuned to optimize model performance.
 Feature importance analysis revealed that regional identifiers and economic indicators were the most significant drivers of emissions.
 
 ## Results
-
-Figure X shows the GHG emissions by region, as predicted by our models.
-Figure X: Predicted GHG emissions by region in 2023.
+Figure 1 shows the GHG Emissions by Region in 2022 to help us with a basic understanding how it is nowadays.
+Figure 1: GHG Emissions by Region in 2022
+![image](./assets/IMG/2.png)
+Figure 2 shows GHG Emissions by Region and Sector in 2022 to visualize how the seector could take account for the GHG Emission
+Figure 2: GHG Emissions by Region and Sector in 2022
+![image](./assets/IMG/5.png)
+Figure 1 shows the features importance for predicting GHG emissions
+Figure 1: Feature Importance for Predicting GHG Emissions
+![image](./assets/IMG/5.png)
+Figure 2 shows the GHG emissions by region, as predicted by our models.
+Figure 2: Predicted GHG emissions by region in 2023.
 ![image](./assets/IMG/6.png)
 Key results include:
 High-emission regions were accurately identified.
