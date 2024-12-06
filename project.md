@@ -160,12 +160,15 @@ Figure 1: GHG Emissions by Region in 2022
 ![image](./assets/IMG/2.png)
 Figure 2 shows GHG Emissions by Region and Sector in 2022 to visualize how the seector could take account for the GHG Emission
 Figure 2: GHG Emissions by Region and Sector in 2022
+![image](./assets/IMG/8.png)
+Figure 3 shows GHG Emissions by Region and Year to get the information of each regionn's contribution and the year contribution
+Figure 3：GHG Emission by Region and Year
+![image](./assets/IMG/4.png)
+Figure 4 shows the features importance for predicting GHG emissions
+Figure 4: Feature Importance for Predicting GHG Emissions
 ![image](./assets/IMG/5.png)
-Figure 1 shows the features importance for predicting GHG emissions
-Figure 1: Feature Importance for Predicting GHG Emissions
-![image](./assets/IMG/5.png)
-Figure 2 shows the GHG emissions by region, as predicted by our models.
-Figure 2: Predicted GHG emissions by region in 2023.
+Figure 5 shows the GHG emissions by region, as predicted by our models.
+Figure 5: Predicted GHG emissions by region in 2023.
 ![image](./assets/IMG/6.png)
 Key results include:
 High-emission regions were accurately identified.
@@ -174,7 +177,7 @@ Models achieved competitive MSE scores, with LightGBM outperforming other approa
 
 ## Discussion
 
-From Figure X, we can observe that certain regions contribute disproportionately to emissions. The feature importance analysis highlighted that economic activity, energy usage, and regional identifiers significantly impact emissions.
+From Figure 1, we can observe that certain regions contribute disproportionately to emissions. The feature importance analysis highlighted that energy usage significantly impact emissions. Than the sector is the second factor influencing the GHG emissions.
 The results demonstrate the utility of machine learning in identifying patterns and predicting future emissions. However, limitations include:
 Dependence on data quality: Missing or inaccurate data can affect model reliability.
 Temporal generalization: LSTM predictions are sensitive to historical trends and require careful tuning.
@@ -185,12 +188,4 @@ From this work, the following conclusions can be made:
 Machine learning effectively identifies key drivers of GHG emissions.
 Predictive models like LightGBM and LSTM can forecast emissions trends accurately.
 Visualization techniques provide actionable insights for policymakers.
-
-
-Here is how this work could be developed further in a future project.
-
-## References
-[1] DALL-E 3
-
-[back](./)
 
