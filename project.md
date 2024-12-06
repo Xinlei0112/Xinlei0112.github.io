@@ -84,11 +84,11 @@ plt.title('Feature Importance for Predicting GHG Emissions')
 plt.xticks(rotation=45)
 plt.show()
 
-## Modelling
+# Modelling
 
-In addition to this, I have trained the LSTM time series analysis model and then predicted the GHG emission in different regions of the world in 2023 and visualized the result
+##In addition to this, I have trained the LSTM time series analysis model and then predicted the GHG emission in different regions of the world in 2023 and visualized the result
 
-Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
+#Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
 
 # 1. Data preprocessing
 features = ['region_encoded', 'sector_encoded', 'Value Added [M.EUR]', 
