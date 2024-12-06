@@ -2,6 +2,7 @@
 
 My project focuses on analyzing and predicting greenhouse gas (GHG) emissions using a combination of exploratory data analysis (EDA), machine learning (ML), and neural networks. This work integrates environmental and economic datasets to gain insights into regional emissions, identify key influencing factors, and predict future emissions trends.
 
+![image](./assets/IMG/datapenguin.png)
 
 ***
 
