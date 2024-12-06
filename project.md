@@ -160,7 +160,7 @@ Figure 1: GHG Emissions by Region in 2022
 ![image](./assets/IMG/2.png)
 Figure 2 shows GHG Emissions by Region and Sector in 2022 to visualize how the seector could take account for the GHG Emission
 Figure 2: GHG Emissions by Region and Sector in 2022
-![image](./assets/IMG/8.png)
+![image](./assets/IMG/8.jpg)
 Figure 3 shows GHG Emissions by Region and Year to get the information of each regionn's contribution and the year contribution
 Figure 3：GHG Emission by Region and Year
 ![image](./assets/IMG/4.png)
