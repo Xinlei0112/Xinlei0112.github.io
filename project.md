@@ -115,7 +115,7 @@ Feature importance analysis revealed that regional identifiers and economic indi
 
 Figure X shows the GHG emissions by region, as predicted by our models.
 Figure X: Predicted GHG emissions by region in 2023.
-![image](./assets/IMG/1.png)
+![image](./assets/IMG/6.png)
 Key results include:
 High-emission regions were accurately identified.
 Temporal trends showed a decrease in emissions for certain regions while others exhibited growth.
