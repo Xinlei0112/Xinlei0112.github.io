@@ -2,8 +2,6 @@
 
 My project focuses on analyzing and predicting greenhouse gas (GHG) emissions using a combination of exploratory data analysis (EDA), machine learning (ML), and neural networks. This work integrates environmental and economic datasets to gain insights into regional emissions, identify key influencing factors, and predict future emissions trends.
 
-![image](./assets/IMG/datapenguin.png)
-
 ***
 
 ## Introduction 
@@ -55,10 +53,42 @@ The models optimize for mean squared error (MSE), providing a quantitative measu
 ```python
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 1. Feature and target value
+features = ['region_encoded', 'sector_encoded', 'Value Added [M.EUR]', 
+            'Employment [1000 p.]', 'Energy Carrier Net Total [TJ]', 'Year']
+target = 'GHG emissions [kg CO2 eq.]'
+
+X = merged_df[features]
+y = merged_df[target]
+
+# 2. Data segmentation (training set and test set)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = RandomForestRegressor(random_state=42)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
+
+# 3. Feature standardization
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 4. Train the random forest model
+model = RandomForestRegressor(random_state=42, n_estimators=100)
+model.fit(X_train_scaled, y_train)
+
+# 5. Importance of extracting features
+feature_importances = model.feature_importances_
+
+# 6. Importance of visual features
+plt.figure(figsize=(10, 6))
+plt.bar(features, feature_importances, alpha=0.8)
+plt.xlabel('Features')
+plt.ylabel('Importance Score')
+plt.title('Feature Importance for Predicting GHG Emissions')
+plt.xticks(rotation=45)
+plt.show()
+
 ## Modelling
 
 Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
@@ -84,7 +114,8 @@ Feature importance analysis revealed that regional identifiers and economic indi
 ## Results
 
 Figure X shows the GHG emissions by region, as predicted by our models.
-Figure X: Predicted GHG emissions by region in 2022.
+Figure X: Predicted GHG emissions by region in 2023.
+![image](./assets/IMG/1.png)
 Key results include:
 High-emission regions were accurately identified.
 Temporal trends showed a decrease in emissions for certain regions while others exhibited growth.
